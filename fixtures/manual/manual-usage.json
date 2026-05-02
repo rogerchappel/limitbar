@@ -1,0 +1,6 @@
+{
+  "providers": [
+    { "id": "codex", "name": "Codex", "used": 820, "limit": 1000, "spendUsd": 12.5, "resetAt": "2026-05-03T00:00:00Z" },
+    { "id": "claude", "name": "Claude Code", "used": 420, "limit": 1000, "spendUsd": 6.2 }
+  ]
+}
