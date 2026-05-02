@@ -1,0 +1,54 @@
+# limitbar
+
+Local-first status bar core for agent usage limits, spend, active runs, queued work, runaway sessions, and alerts.
+
+`limitbar` is a safe CLI/TUI-ready MVP for a future macOS menu bar app. It reads local files only, prefers manual counters and fixture-backed summaries, and avoids cloud APIs unless a future user explicitly configures them.
+
+## Quickstart
+
+```bash
+npm test
+node src/cli.js status --config fixtures/limitbar.config.json
+node src/cli.js status --config fixtures/limitbar.config.json --line
+node src/cli.js status --config fixtures/limitbar.config.json --json
+```
+
+Example one-line output for menu bar polling:
+
+```text
+limitbar CRIT · $20.65 · 2 active · 5 queued · 3 alerts
+```
+
+## Configuration
+
+```json
+{
+  "adapters": {
+    "manual": { "enabled": true, "path": "fixtures/manual/manual-usage.json" },
+    "openclaw": { "enabled": true, "path": "fixtures/openclaw/session-summary.json" }
+  }
+}
+```
+
+## Safety boundaries
+
+- Reads local paths only; `http://` and `https://` inputs are rejected.
+- Does not scrape credentials or bypass provider limits.
+- Does not make hidden network calls.
+- Redacts obvious secret fields from JSON output.
+- Missing adapter files return empty local data rather than calling external APIs.
+
+## Commands
+
+```bash
+limitbar status [--config path] [--json|--line] [--fail-on-critical]
+```
+
+## Development
+
+```bash
+npm test
+npm run check
+npm run smoke
+bash scripts/validate.sh
+```
