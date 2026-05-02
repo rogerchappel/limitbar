@@ -1,0 +1,8 @@
+{
+  "runs": [
+    { "id": "run-1", "label": "repoctx scan", "status": "running", "durationMinutes": 110, "spendUsd": 1.75 },
+    { "id": "run-2", "label": "docs worker", "status": "active", "durationMinutes": 12, "spendUsd": 0.2 },
+    { "id": "run-3", "label": "queued worker", "status": "queued", "durationMinutes": 0 }
+  ],
+  "queue": [{ "id": "q-1" }, { "id": "q-2" }, { "id": "q-3" }, { "id": "q-4" }]
+}
