@@ -1,0 +1,31 @@
+{
+  "name": "limitbar",
+  "version": "0.1.0",
+  "description": "Local-first agent limit and run monitor CLI",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "limitbar": "./src/cli.js"
+  },
+  "files": [
+    "src",
+    "fixtures",
+    "docs",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "smoke": "node src/cli.js status --config fixtures/limitbar.config.json --json",
+    "check": "node --check src/cli.js && node --check src/index.js",
+    "build": "node scripts/build-check.js"
+  },
+  "keywords": ["agents", "limits", "cli", "openclaw", "local-first", "menubar"],
+  "author": "Roger Chappel",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
