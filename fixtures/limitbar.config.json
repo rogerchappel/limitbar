@@ -1,0 +1,14 @@
+{
+  "thresholds": {
+    "spendWarnUsd": 10,
+    "spendCriticalUsd": 25,
+    "usageWarnRatio": 0.8,
+    "usageCriticalRatio": 0.95,
+    "runawayMinutes": 90,
+    "queueWarn": 5
+  },
+  "adapters": {
+    "manual": { "enabled": true, "path": "fixtures/manual/manual-usage.json" },
+    "openclaw": { "enabled": true, "path": "fixtures/openclaw/session-summary.json" }
+  }
+}
