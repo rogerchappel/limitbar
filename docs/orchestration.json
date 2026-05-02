@@ -1,0 +1,8 @@
+{
+  "name": "limitbar",
+  "mode": "local-first",
+  "inputs": ["manual usage JSON", "OpenClaw session summary JSON"],
+  "outputs": ["status line", "human table", "redacted JSON"],
+  "alerts": ["usage ratio", "spend", "queue depth", "runaway duration"],
+  "forbidden": ["credential scraping", "limit bypass", "hidden network calls", "secret logging"]
+}
