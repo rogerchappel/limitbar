@@ -1,0 +1,26 @@
+{
+  "name": "limitbar",
+  "version": 1,
+  "commands": {
+    "statusText": "limitbar status --config examples/limitbar.config.json --format text",
+    "statusJson": "limitbar status --config examples/limitbar.config.json --format json",
+    "validate": "bash scripts/validate.sh"
+  },
+  "exitCodes": {
+    "0": "ok",
+    "1": "warning",
+    "2": "critical-or-error"
+  },
+  "inputs": [
+    "local JSON usage snapshots",
+    "fixture JSON files",
+    "local OpenClaw session summary JSON files"
+  ],
+  "network": false,
+  "credentials": false,
+  "future": [
+    "macOS menu-bar wrapper",
+    "compact one-line renderer",
+    "additional safe local export adapters"
+  ]
+}
