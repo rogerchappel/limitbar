@@ -1,0 +1,9 @@
+{
+  "id": "agent:havoc:subagent:limitbar-b",
+  "label": "README review",
+  "status": "completed",
+  "startedAt": "2026-05-09T05:00:00+10:00",
+  "completedAt": "2026-05-09T05:14:00+10:00",
+  "tokens": 12000,
+  "cost": 0.3
+}

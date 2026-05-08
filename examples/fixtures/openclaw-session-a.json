@@ -1,0 +1,9 @@
+{
+  "id": "agent:havoc:subagent:limitbar-a",
+  "label": "limitbar scaffold",
+  "status": "active",
+  "startedAt": "2026-05-09T03:00:00+10:00",
+  "ageMinutes": 210,
+  "tokens": 90000,
+  "cost": 2.2
+}
