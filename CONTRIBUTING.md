@@ -1,79 +1,49 @@
-# Contributing
+# Contributing to limitbar
 
-Thanks for helping improve `limitbar`.
+Thanks for helping make agent usage easier to supervise.
 
-This project values small, reviewable contributions with clear verification.
+## Ground rules
 
-## Issues
+- Keep the default status path local-first.
+- Do not add hidden network calls.
+- Do not scrape credentials, browser storage, Keychain entries, provider tokens, or private prompts.
+- Prefer small, reviewable changes with fixtures and tests.
 
-Before opening an issue:
+## Development setup
 
-- Search existing issues.
-- Confirm the issue applies to `limitbar`.
-- Include enough context for maintainers to understand or reproduce the request.
-
-Bug reports should include:
-
-- What happened.
-- What you expected.
-- Steps to reproduce.
-- Relevant logs, screenshots, or files.
-- The smallest verification step that demonstrates the issue.
-
-Feature requests should include:
-
-- The use case.
-- Why the current project does not solve it.
-- Risks or compatibility concerns.
-- Suggested files or behavior that may need to change.
-
-## Pull Requests
-
-Pull requests should:
-
-- Focus on one reviewable intent.
-- Use a branch.
-- Follow Conventional Commits.
-- Include tests or verification appropriate to the change.
-- Update documentation when behavior or usage changes.
-- Avoid unrelated formatting or dependency churn.
-- Avoid secrets, private contact details, and project-specific sensitive information.
-
-## Review Pack
-
-Use this format for meaningful changes:
-
-```md
-## Review Pack
-Repo:
-Branch:
-PR:
-Task:
-Status: done / blocked / needs review
-Summary:
-Commits:
-Files changed:
-Verification:
-Risk level:
-Rollback plan:
-Human decision needed:
-Next recommended task:
+```sh
+npm install
+npm run check
+npm test
+npm run smoke
+bash scripts/validate.sh
 ```
 
-## Verification
+## Adding an adapter
 
-Every contribution should include verification.
+Adapters should read explicit, user-configured local inputs. If an adapter needs network access, it must be opt-in, documented, tested separately, and disabled by default.
 
-Examples:
+Every adapter should include:
 
-- Documentation: inspect rendered Markdown or review the diff.
-- Tests: run the targeted test command.
-- Types: run the project typecheck.
-- Build: run the smallest build command that covers the change.
-- Manual QA: provide exact steps and observed result.
+1. synthetic fixtures;
+2. unit tests for parsing;
+3. failure behavior that avoids logging file contents or secrets;
+4. README/docs updates.
 
-If verification cannot be run, explain why and provide the exact command maintainers should run.
+## Commit style
 
-## Maintainer Review
+Use clear atomic commits such as:
 
-Maintainers may request narrower scope, clearer verification, additional tests, or safer defaults before merging.
+- `feat: add compact renderer`
+- `test: cover spend thresholds`
+- `docs: document menu-bar wrapper path`
+
+## Pull requests
+
+Before opening a PR, run:
+
+```sh
+npm run release:check
+```
+
+If a check cannot run, say why in the PR description.
