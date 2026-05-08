@@ -1,59 +1,70 @@
-# limitbar
+# limitbar PRD
 
-Status: in-progress
+## Status
 
-## Scorecard
-
-Total: 86/100
-Band: build now
-Last scored: 2026-04-29
-Scored by: Neo
-
-| Criterion | Points | Notes |
-|---|---:|---|
-| Problem pain | 18/20 | Directly addresses a repeated workflow pain. |
-| Demand signal | 20/20 | Strong source signal or internal demand. |
-| V1 buildability | 16/20 | Feasible, but platform/integration risk remains. |
-| Differentiation | 13/15 | Clear wedge versus adjacent tools. |
-| Agentic workflow leverage | 14/15 | Improves agent throughput or supervision. |
-| Distribution potential | 5/10 | Distribution will require examples and content. |
+V1 implemented as a local-first CLI/library, with the macOS menu-bar app kept as a deliberate future path.
 
 ## Pitch
 
-A macOS menu bar app that shows agent usage limits, spend, active runs, queued work, and risky long-running sessions across Codex, Claude Code, OpenClaw, and local agents.
+limitbar gives agent-heavy developers a glanceable status line for model-provider limits, spend, active runs, queued work, and risky long-running sessions.
 
-## Why It Matters
+## Inspiration and attribution
 
-CodexBar going viral proves demand for glanceable agent-limit visibility. Roger needs this for high-throughput agent teams and spend control.
+The idea was inspired by Peter Steinberger's CodexBar, a macOS menu-bar app whose popularity showed real demand for visible agent-usage limits. limitbar starts with a portable CLI/status adapter layer so the core data model, safety rules, and tests are useful before any native shell is built.
 
-## Qualification
+## Problem
 
-CodexBar’s star count is the strongest external signal in this set. Internal demand is high because Roger is scaling agent usage and wants throughput without losing control.
+Agent teams make it easy to lose track of:
 
-Source / adjacent research: Inspired by steipete/CodexBar, Swift menu bar app with 11,399 stars / 860 forks checked 2026-04-29.
+- daily or windowed usage limits;
+- local budget counters;
+- active or stuck runs;
+- noisy dashboards spread across provider-specific tools.
 
-Decision: build now
+Developers need a safe local dashboard that does not scrape credentials, bypass provider limits, or phone home.
 
-## V1 Scope
+## V1 scope
 
-- Menu bar status for configured providers
-- Manual token/limit counters where APIs are unavailable
-- OpenClaw session summary adapter
-- Alerts for near-limit and runaway sessions
+- Read configured provider/session usage snapshots from fixture JSON and local files.
+- Summarize limits, spend, active runs, total runs, and risky runaway sessions.
+- Warn on near-limit, critical-limit, spend, and long-running sessions.
+- Provide a small CLI and library API.
+- Include realistic fixtures and smoke tests.
+- Document safety, local-first operation, and future macOS menu-bar direction.
 
-## Out of Scope
+## Non-goals
 
-- Credential scraping
-- Bypassing provider limits
-- Cloud account aggregation
+- Credential scraping.
+- Provider-limit bypassing.
+- Hidden network calls.
+- Cloud aggregation service.
+- Native macOS app in V1.
 
-## Verification
+## Users
 
-- Unit or fixture tests for core parsing/generation behavior.
-- README with install, quickstart, and safety notes.
-- Local-first behavior documented clearly.
-- No hidden network, credential, or publish behavior.
+- Solo developers running multiple coding agents.
+- Agent orchestrator operators who need a terminal status adapter.
+- Future menu-bar integrators that need a tested local data core.
 
-## Agent Prompt
+## Functional requirements
 
-Build `limitbar` as a safe local macOS app. Store credentials in Keychain if needed, prefer manual/local adapters, and never log secrets.
+1. Accept a JSON config with providers and thresholds.
+2. Support fixture, local JSON file, and local OpenClaw session-summary adapters.
+3. Normalize provider snapshots into one data model.
+4. Evaluate near-limit, critical, spend, and runaway warnings.
+5. Render text and JSON status.
+6. Exit `0` when OK, `1` on warnings, and `2` on critical status or CLI errors.
+
+## Safety requirements
+
+- No network calls in the status path.
+- No credential discovery or parsing.
+- Ignore malformed OpenClaw local session files without printing their contents.
+- Keep examples synthetic.
+
+## Future work
+
+- macOS menu-bar wrapper around the CLI/library.
+- More provider-specific manual export adapters.
+- Queue-depth adapters for orchestrators that expose safe local state.
+- Optional notification hooks controlled explicitly by config.
