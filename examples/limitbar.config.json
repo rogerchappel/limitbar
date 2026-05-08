@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "name": "example-local-agent-board",
+  "thresholds": {
+    "nearLimitPercent": 80,
+    "criticalLimitPercent": 95,
+    "runawayMinutes": 120,
+    "spendWarningPercent": 75
+  },
+  "providers": [
+    { "id": "codex", "label": "Codex", "type": "fixture", "path": "fixtures/codex.json" },
+    { "id": "claude", "label": "Claude Code", "type": "fixture", "path": "fixtures/claude.json" },
+    { "id": "openclaw", "label": "OpenClaw local sessions", "type": "openclaw", "path": "fixtures" }
+  ]
+}
