@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-05-09T06:00:00+10:00",
+  "limits": [
+    { "name": "daily tokens", "used": 820000, "limit": 1000000, "unit": "tokens", "window": "day", "resetsAt": "2026-05-10T00:00:00+10:00" },
+    { "name": "concurrent runs", "used": 7, "limit": 10, "unit": "runs", "window": "now" }
+  ],
+  "spend": { "used": 42.5, "budget": 60, "currency": "USD", "window": "month" },
+  "runs": [
+    { "id": "codex-101", "label": "repo cleanup", "status": "active", "ageMinutes": 38, "tokens": 120000, "cost": 3.4 },
+    { "id": "codex-102", "label": "overnight refactor", "status": "active", "ageMinutes": 185, "tokens": 280000, "cost": 8.7 },
+    { "id": "codex-099", "label": "test repair", "status": "completed", "ageMinutes": 24, "tokens": 44000, "cost": 1.2 }
+  ],
+  "notes": ["example fixture; not read from a provider API"]
+}
