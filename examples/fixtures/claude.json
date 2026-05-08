@@ -1,0 +1,10 @@
+{
+  "capturedAt": "2026-05-09T06:00:00+10:00",
+  "limits": [
+    { "name": "five-hour messages", "used": 41, "limit": 50, "unit": "messages", "window": "5h" }
+  ],
+  "spend": { "used": 18, "budget": 40, "currency": "USD", "window": "week" },
+  "runs": [
+    { "id": "claude-a", "label": "docs pass", "status": "active", "ageMinutes": 22, "tokens": 31000, "cost": 0.9 }
+  ]
+}
