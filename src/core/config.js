@@ -1,5 +1,6 @@
+import { existsSync } from 'node:fs';
 import { homedir } from 'node:os';
-import { resolve } from 'node:path';
+import { dirname, isAbsolute, resolve } from 'node:path';
 import { safeReadJson, assertLocalPath } from './safety.js';
 
 export const defaultConfig = {
@@ -21,8 +22,19 @@ function expandHome(path) {
   return path?.startsWith('~/') ? resolve(homedir(), path.slice(2)) : path;
 }
 
+function resolveConfigPath(path, baseDir) {
+  const expanded = expandHome(path);
+  if (!expanded) return expanded;
+  if (isAbsolute(expanded)) return expanded;
+  const fromConfig = resolve(baseDir, expanded);
+  if (existsSync(fromConfig)) return fromConfig;
+  return resolve(expanded);
+}
+
 export async function loadConfig(path) {
-  const raw = path ? await safeReadJson(assertLocalPath(path), { fallback: {} }) : {};
+  const configPath = path ? assertLocalPath(path) : undefined;
+  const raw = configPath ? await safeReadJson(configPath, { fallback: {} }) : {};
+  const baseDir = configPath ? dirname(resolve(configPath)) : process.cwd();
   const config = {
     ...defaultConfig,
     ...raw,
@@ -33,7 +45,7 @@ export async function loadConfig(path) {
     }
   };
   for (const adapter of Object.values(config.adapters)) {
-    if (adapter.path) adapter.path = expandHome(assertLocalPath(adapter.path));
+    if (adapter.path) adapter.path = assertLocalPath(resolveConfigPath(adapter.path, baseDir));
   }
   return config;
 }
