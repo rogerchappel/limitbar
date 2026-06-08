@@ -23,7 +23,9 @@
     "test": "node --test",
     "smoke": "node src/cli.js status --config fixtures/limitbar.config.json --json",
     "check": "node --check src/cli.js && node --check src/index.js",
-    "build": "node scripts/build-check.js"
+    "build": "node scripts/build-check.js",
+    "package:smoke": "npm pack --dry-run",
+    "release:check": "npm run check && npm test && npm run build && npm run smoke && npm run package:smoke"
   },
   "keywords": [
     "agents",
