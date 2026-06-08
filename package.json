@@ -14,7 +14,8 @@
     "src",
     "fixtures",
     "docs",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "test": "node --test",
@@ -22,10 +23,25 @@
     "check": "node --check src/cli.js && node --check src/index.js",
     "build": "node scripts/build-check.js"
   },
-  "keywords": ["agents", "limits", "cli", "openclaw", "local-first", "menubar"],
+  "keywords": [
+    "agents",
+    "limits",
+    "cli",
+    "openclaw",
+    "local-first",
+    "menubar"
+  ],
   "author": "Roger Chappel",
   "license": "MIT",
   "engines": {
     "node": ">=20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogerchappel/limitbar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rogerchappel/limitbar/issues"
+  },
+  "homepage": "https://github.com/rogerchappel/limitbar#readme"
 }
