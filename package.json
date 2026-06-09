@@ -8,7 +8,7 @@
     ".": "./src/index.js"
   },
   "bin": {
-    "limitbar": "src/cli.js"
+    "limitbar": "./src/cli.js"
   },
   "files": [
     "src",
@@ -16,7 +16,8 @@
     "docs",
     "README.md",
     "LICENSE",
-    "SECURITY.md"
+    "SECURITY.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "test": "node --test",
