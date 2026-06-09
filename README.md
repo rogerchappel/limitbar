@@ -52,3 +52,8 @@ npm run check
 npm run smoke
 bash scripts/validate.sh
 ```
+
+Release verification scripts not already covered above:
+
+- `npm run test` - node --test
+- `npm run build` - node scripts/build-check.js
