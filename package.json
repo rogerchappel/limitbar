@@ -8,14 +8,15 @@
     ".": "./src/index.js"
   },
   "bin": {
-    "limitbar": "./src/cli.js"
+    "limitbar": "src/cli.js"
   },
   "files": [
     "src",
     "fixtures",
     "docs",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "SECURITY.md"
   ],
   "scripts": {
     "test": "node --test",
