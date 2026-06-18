@@ -69,3 +69,14 @@ Before publishing or tagging a release, run the same verification path used by C
 - `npm run package:smoke`
 
 See `docs/release-readiness.md` for the package surface, CLI bins, and reviewer checklist.
+
+## Release readiness
+
+Before opening a release PR, run the same checks that CI runs:
+
+```sh
+npm run release:check
+npm pack --dry-run
+```
+
+The package smoke keeps the published tarball contents visible before tagging or publishing.
