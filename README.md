@@ -80,3 +80,10 @@ npm pack --dry-run
 ```
 
 The package smoke keeps the published tarball contents visible before tagging or publishing.
+
+## Install
+
+```bash
+npm install limitbar
+npx limitbar --help
+```
