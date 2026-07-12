@@ -1,6 +1,9 @@
 #!/usr/bin/env node
+import { createRequire } from 'node:module';
 import { collectSnapshot, loadConfig, renderJson, renderStatusLine, renderTable } from './index.js';
 
+const require = createRequire(import.meta.url);
+const { version } = require('../package.json');
 const args = process.argv.slice(2);
 const command = args[0] ?? 'status';
 
@@ -10,6 +13,10 @@ function option(name, fallback = undefined) {
 }
 
 async function main() {
+  if (args.includes('--version') || args.includes('-v')) {
+    process.stdout.write(`${version}\n`);
+    return;
+  }
   if (args.includes('--help') || command === 'help') return help();
   if (command !== 'status' && command !== 'summary') throw new Error(`Unknown command: ${command}`);
   const config = await loadConfig(option('--config'));
@@ -21,7 +28,7 @@ async function main() {
 }
 
 function help() {
-  process.stdout.write(`limitbar\n\nUsage:\n  limitbar status [--config path] [--json|--line] [--fail-on-critical]\n\nLocal-first monitor for manual agent limits and fixture-backed OpenClaw session summaries.\n`);
+  process.stdout.write(`limitbar\n\nUsage:\n  limitbar status [--config path] [--json|--line] [--fail-on-critical]\n  limitbar --version\n\nLocal-first monitor for manual agent limits and fixture-backed OpenClaw session summaries.\n`);
 }
 
 main().catch((error) => {

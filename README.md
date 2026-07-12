@@ -86,4 +86,5 @@ The package smoke keeps the published tarball contents visible before tagging or
 ```bash
 npm install limitbar
 npx limitbar --help
+npx limitbar --version
 ```
