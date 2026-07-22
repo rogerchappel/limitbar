@@ -11,7 +11,9 @@ export function evaluateAlerts(items, thresholds) {
     if (item.kind === 'sessions') {
       if (item.queued >= thresholds.queueWarn) alerts.push(alert('warn', `${item.name} queue has ${item.queued} items`, item));
       for (const run of item.runs ?? []) {
-        if (run.durationMinutes >= thresholds.runawayMinutes) alerts.push(alert('critical', `${run.label} has run for ${run.durationMinutes}m`, { ...item, run }));
+        if (run.status !== 'queued' && run.durationMinutes >= thresholds.runawayMinutes) {
+          alerts.push(alert('critical', `${run.label} has run for ${run.durationMinutes}m`, { ...item, run }));
+        }
       }
     }
   }
