@@ -1,9 +1,5 @@
 # Changelog
 
-## Unreleased
-
-- Release readiness: document local verification, npm package metadata, and pack contents for the next public release.
-
 All notable changes to this project will be documented in this file.
 
 This project follows the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
@@ -14,12 +10,10 @@ format and uses semantic versioning when versioned releases are published.
 ### Added
 
 - Initial project setup.
+- Release-readiness documentation for local verification, npm package metadata,
+  and package contents.
 
-## Release Links
+Release history is available on the [Releases] page.
 
-- Unreleased:
-  `https://github.com/rogerchappel/users-roger-developer-my-opensource-worktrees-limitbar-build/compare/...HEAD`
-- Latest release:
-  `https://github.com/rogerchappel/users-roger-developer-my-opensource-worktrees-limitbar-build/releases/latest`
-
-Replace placeholder links once the first release tag exists.
+[Unreleased]: https://github.com/rogerchappel/limitbar/commits/main
+[Releases]: https://github.com/rogerchappel/limitbar/releases
