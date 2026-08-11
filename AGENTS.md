@@ -1,14 +1,14 @@
-# Agent Operating Instructions for /Users/roger/Developer/my-opensource/.worktrees/limitbar-build
+# Agent Operating Instructions for limitbar
 
-This file defines how AI agents and human maintainers should work in `/Users/roger/Developer/my-opensource/.worktrees/limitbar-build`.
+This file defines how AI agents and human maintainers should work in the `limitbar` repository.
 
 ## Project Context
 
-- Project: `/Users/roger/Developer/my-opensource/.worktrees/limitbar-build`
-- Repository: ``
-- Primary maintainer: ``
-- Default branch: ``
-- Package manager: ``
+- Project: `limitbar`
+- Repository: `https://github.com/rogerchappel/limitbar`
+- Primary maintainer: Roger Chappel
+- Default branch: `main`
+- Package manager: npm
 - Primary verification command: `bash scripts/validate.sh`
 
 ## Core Principle
@@ -86,7 +86,7 @@ Every completed task must return:
 
 ```md
 ## Review Pack
-Repo: /Users/roger/Developer/my-opensource/.worktrees/limitbar-build
+Repo: https://github.com/rogerchappel/limitbar
 Branch:
 PR:
 Task:
@@ -172,5 +172,4 @@ Stop and ask before touching:
 Never commit secrets. Never mutate production data unless explicitly instructed.
 
 ## Repository-Specific Notes
-
 
