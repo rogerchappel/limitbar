@@ -120,7 +120,30 @@ run_package_script() {
   esac
 }
 
-printf 'Checking /Users/roger/Developer/my-opensource/.worktrees/limitbar-build required files...\n'
+check_publication_hygiene() {
+  local pattern
+  local matches
+  local found=0
+  local patterns=(
+    "/Users/"'roger'
+    ".worktrees/"'limitbar-build'
+    "users-roger-developer-my-opensource-worktrees-"'limitbar-build'
+    "Replace this "'section'
+    "github.com/rogerchappel/"'users-'
+  )
+
+  for pattern in "${patterns[@]}"; do
+    matches="$(grep -RInF --exclude-dir=.git --exclude-dir=node_modules -- "$pattern" . || true)"
+    if [ -n "$matches" ]; then
+      printf '%s\n' "$matches" >&2
+      found=1
+    fi
+  done
+
+  [ "$found" -eq 0 ]
+}
+
+printf 'Checking limitbar required files...\n'
 
 check_file "README.md"
 check_file "AGENTS.md"
@@ -129,11 +152,15 @@ check_file "SECURITY.md"
 check_file ".github/pull_request_template.md"
 check_file "scripts/validate.sh"
 
-printf '\nChecking /Users/roger/Developer/my-opensource/.worktrees/limitbar-build required directories...\n'
+printf '\nChecking limitbar required directories...\n'
 
 check_dir ".github"
 check_dir "docs"
 check_dir "scripts"
+
+printf '\nChecking publishable repository content...\n'
+
+run_check "no maintainer-local paths, template residue, or malformed repository URLs" check_publication_hygiene
 
 printf '\nRunning local project checks where present...\n'
 
