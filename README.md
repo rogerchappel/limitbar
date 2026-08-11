@@ -42,6 +42,9 @@ limitbar CRIT · $20.65 · 2 active · 5 queued · 3 alerts
 
 ```bash
 limitbar status [--config path] [--json|--line] [--fail-on-critical]
+limitbar summary [--config path] [--json|--line] [--fail-on-critical]
+limitbar --help|-h
+limitbar --version|-v
 ```
 
 ## Development
