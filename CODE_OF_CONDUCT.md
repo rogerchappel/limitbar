@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We are committed to making participation in `/Users/roger/Developer/my-opensource/.worktrees/limitbar-build` respectful and harassment-free.
+We are committed to making participation in `limitbar` respectful and harassment-free.
 
 ## Expected Behavior
 
