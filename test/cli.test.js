@@ -58,6 +58,43 @@ test('cli accepts a valid explicit config', () => {
   assert.equal(JSON.parse(result.stdout).totals.providers, 2);
 });
 
+test('cli accepts command and help/version aliases', () => {
+  for (const args of [['summary', '--line'], ['--help'], ['-h'], ['help'], ['--version'], ['-v']]) {
+    const result = spawnSync(process.execPath, ['src/cli.js', ...args], { encoding: 'utf8' });
+    assert.equal(result.status, 0, `${args.join(' ')}: ${result.stderr}`);
+    assert.equal(result.stderr, '');
+    assert.notEqual(result.stdout, '');
+  }
+});
+
+test('cli rejects invalid argument combinations without normal output', () => {
+  const cases = [
+    [['status', '--bogus'], /Unknown option: --bogus/],
+    [['status', '--config'], /Missing value for --config/],
+    [['status', '--json', '--line'], /--json and --line cannot be used together/],
+    [['--version', 'junk'], /Unexpected argument: junk/],
+    [['status', '--config', 'one', '--config', 'two'], /Duplicate option: --config/],
+    [['status', 'junk'], /Unexpected argument: junk/]
+  ];
+  for (const [args, message] of cases) {
+    const result = spawnSync(process.execPath, ['src/cli.js', ...args], { encoding: 'utf8' });
+    assert.notEqual(result.status, 0, args.join(' '));
+    assert.equal(result.stdout, '');
+    assert.match(result.stderr, message);
+  }
+});
+
+test('cli accepts valid option combinations', () => {
+  for (const format of ['--json', '--line']) {
+    const result = spawnSync(process.execPath, [
+      'src/cli.js', 'status', '--config', 'fixtures/limitbar.config.json', format, '--fail-on-critical'
+    ], { encoding: 'utf8' });
+    assert.equal(result.status, 2);
+    assert.equal(result.stderr, '');
+    assert.notEqual(result.stdout, '');
+  }
+});
+
 test('old queued sessions do not trigger --fail-on-critical', () => {
   const configDir = mkdtempSync(join(tmpdir(), 'limitbar-queued-'));
   try {
