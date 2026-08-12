@@ -20,6 +20,44 @@ test('cli help documents version flag', () => {
   assert.match(result.stdout, /limitbar --version/);
 });
 
+test('cli fails with a path-specific diagnostic for a missing explicit config', () => {
+  const configPath = join(tmpdir(), 'limitbar-missing-cli-config.json');
+  const result = spawnSync(process.execPath, [
+    'src/cli.js', 'status', '--config', configPath, '--json'
+  ], { encoding: 'utf8' });
+
+  assert.equal(result.status, 1);
+  assert.equal(result.stdout, '');
+  assert.match(result.stderr, new RegExp(`Could not read JSON at ${configPath}`));
+});
+
+test('cli fails with a path-specific diagnostic for malformed explicit JSON', () => {
+  const configDir = mkdtempSync(join(tmpdir(), 'limitbar-cli-config-'));
+  try {
+    const configPath = join(configDir, 'invalid.json');
+    writeFileSync(configPath, '{invalid json\n', 'utf8');
+    const result = spawnSync(process.execPath, [
+      'src/cli.js', 'status', '--config', configPath, '--json'
+    ], { encoding: 'utf8' });
+
+    assert.equal(result.status, 1);
+    assert.equal(result.stdout, '');
+    assert.match(result.stderr, new RegExp(`Could not read JSON at ${configPath}`));
+  } finally {
+    rmSync(configDir, { recursive: true, force: true });
+  }
+});
+
+test('cli accepts a valid explicit config', () => {
+  const result = spawnSync(process.execPath, [
+    'src/cli.js', 'status', '--config', 'fixtures/limitbar.config.json', '--json'
+  ], { encoding: 'utf8' });
+
+  assert.equal(result.status, 0);
+  assert.equal(result.stderr, '');
+  assert.equal(JSON.parse(result.stdout).totals.providers, 2);
+});
+
 test('cli accepts command and help/version aliases', () => {
   for (const args of [['summary', '--line'], ['--help'], ['-h'], ['help'], ['--version'], ['-v']]) {
     const result = spawnSync(process.execPath, ['src/cli.js', ...args], { encoding: 'utf8' });

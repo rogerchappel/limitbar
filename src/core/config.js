@@ -33,7 +33,7 @@ function resolveConfigPath(path, baseDir) {
 
 export async function loadConfig(path) {
   const configPath = path ? assertLocalPath(path) : undefined;
-  const raw = configPath ? await safeReadJson(configPath, { fallback: {} }) : {};
+  const raw = configPath ? await safeReadJson(configPath) : {};
   const baseDir = configPath ? dirname(resolve(configPath)) : process.cwd();
   const config = {
     ...defaultConfig,

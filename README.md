@@ -47,6 +47,8 @@ limitbar --help|-h
 limitbar --version|-v
 ```
 
+When `--config` is supplied, the file must exist and contain valid JSON. A missing or malformed explicit config exits non-zero and reports the requested path. Missing optional adapter data files continue to produce empty local data as described above.
+
 ## Development
 
 ```bash
